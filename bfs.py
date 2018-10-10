@@ -5,20 +5,24 @@ graph,weight = g.GenerationGraf(2,10)
 print (graph, weight, sep='\n')
 def bfs(graph, start, weight = None, end = None):
      path = {}
+     # path = []
      queue = [start]
      tmp = start
      while queue:
          vertex = queue.pop(0)
          if vertex not in path:
              path[vertex] = tmp
+             # path.append(vertex)
              queue.extend(graph[vertex])
          tmp = vertex
+
      if end is not None:
          tmp = end
          sum = 0
          while tmp is not start:
              sum += weight[(path[tmp],tmp)]
              print( weight[(path[tmp],tmp)],path[tmp],tmp)
+
      return path
 print()
 print (bfs(graph, 1, weight, 7))
