@@ -1,5 +1,30 @@
-graph={ 0:[1,3,4], 1:[0,2,4], 2:[1,6], 3:[0,4,6], 4:[0,1,3,5], 5:[4], 6:[2,3] }
-weight={(0,1):2}
+
+import pickle
+# graph={ 0:[1,3,4], 1:[0,2,4], 2:[1,6], 3:[0,4,6], 4:[0,1,3,5], 5:[4], 6:[2,3] }
+# weight={(0,1):2}
+
+def genAndSave(N, M = None):
+    """
+    Генерация и сохранения в файле графа
+    """
+    if M is None:
+        M = N
+    graph, weight = GenerationGraf(N, M)
+    with open('graph.pickle', 'wb') as f:
+        pickle.dump(graph, f)
+    with open('weight.pickle', 'wb') as f:
+        pickle.dump(weight, f)
+
+def load():
+    """
+    Загрузка графа
+    """
+    with open('graph.pickle', 'rb') as f:
+        graph = pickle.load(f)
+    with open('weight.pickle', 'rb') as f:
+        weight = pickle.load(f)
+    return graph, weight
+
 def GenerationGraf(n,m=None):
     """Генерирует граф"""
     if m is None:

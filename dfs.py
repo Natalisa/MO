@@ -1,8 +1,8 @@
 import generation as g
 import pickle
 import time
-from bfs import genAndSave, load
-N = 5
+from generation import genAndSave, load, GenerationGraf
+N = 100
 
 #graph={ 0:[1,3,4], 1:[0,2,4], 2:[1,6], 3:[0,4,6], 4:[0,1,3,5], 5:[4], 6:[2,3] }
 
@@ -27,11 +27,9 @@ def dfs_paths(graph, start, goal):
 
 
 if __name__ == "__main__":
-    genAndSave(4,5)
+    genAndSave(N,N)
     graph, weight = load()
-    print(graph)
-    result_path = dfs_paths(graph,1,20)
-    print(result_path)
+    result_path = dfs_paths(graph,1,N*N)
     sum = 0
     for a in range(len(result_path)-1):
         x = result_path[a]
