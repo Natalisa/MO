@@ -33,10 +33,11 @@ if __name__ == "__main__":
     for i in range(1, L):
         for j in range(len(lvl)):
             if path[i] - j in path and path[i] - j < path[i]:
+                cell = lvl[path.index(path[i] - j)]
                 if path[i]-j in path and j + 1 < len(lvl):
-                    minimum = min(lvl[path.index(path[i]-j)][j-1], lvl[path.index(path[i]-j)][j], lvl[path.index(path[i]-j)][j+1])
+                    minimum = min(cell[j-1], cell[j], cell[j+1])
                 elif path[i]-j in path:
-                    minimum = min(lvl[path.index(path[i]-j)][j-1], lvl[path.index(path[i]-j)][j])
+                    minimum = min(cell[j-1], cell[j])
                 if minimum != INF:
                     lvl[i][j] = minimum + 1
 
@@ -52,5 +53,8 @@ if __name__ == "__main__":
         minimum = min(lvl[ path.index(recoverPath[-1] ) ])
         ind = lvl[path.index(recoverPath[-1] )].index(min(lvl[path.index(recoverPath[-1] )]))
         #print("min",minimum,"id", ind, recoverPath)
+        if minimum == INF:
+            print("Решение не найдено")
+            exit(-1)
 
     print("Оптимальный путь =", recoverPath[::-1])
