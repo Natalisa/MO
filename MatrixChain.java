@@ -1,7 +1,7 @@
 public class MatrixChain {
        public String printOp(int i, int j, int[][] sp) {
                 if (i == j) {
-			return "A" + String.valueOf(i + 1);
+			return "A" + String.valueOf(i);
 		} else {
 			return "(" + this.printOp(i, sp[i][j], sp) + "x" + this.printOp(sp[i][j] + 1, j, sp) + ")";
 		}
@@ -27,14 +27,14 @@ public class MatrixChain {
 		}
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= n; j++) {
-				System.out.print(String.valueOf(dp[i][j]) + " ");
+				System.out.printf("%6d ",dp[i][j]);
 			}
 			System.out.println();
 		}
 		System.out.println();
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= n; j++) {
-				System.out.print(String.valueOf(sp[i][j]) + " ");
+				System.out.printf("%6d ", sp[i][j]);
 			}
 			System.out.println();
 		}
@@ -42,12 +42,14 @@ public class MatrixChain {
 		if (n == 0){
 			System.out.println("(A1)");
 		} else {
-			System.out.println(this.printOp(0, n-1, sp));		
+			System.out.println(this.printOp(1, n, sp));
 		}
 	}
 	
 	public static void main(String[] args) {
-		int[] test = { 30,35,15,5,10,20,25 };
+		int[] test = { 10,20,50,1,100 }; // ((M1*(M2*M3))*M4)
+		//int[] test = { 10,20,5,4,30,6 }; // ((M1*M2)*(M3*(M4*M5)))
+		//int[] test = { 30,35,15,5,10,20,25 }; // ((M1*(M2*M3))*((M4*M5)*M6))
 		(new MatrixChain()).multiplyOrder(test);
 	}
 }
