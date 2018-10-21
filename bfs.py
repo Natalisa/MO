@@ -4,13 +4,13 @@ import time
 #weight={(0,1):2}
 
 def bfs(graph, start, weight = None, end = None):
+     print(end)
      path = []
      queue = [start]
      newPath = []
      visited = []
-     for i in range(N*N+1):
+     for i in range(N*N-1):
         visited.append(False)
-     print('ДОЛЖНО БЫТЬ =', N + len(weight))
      op = 0
      start = time.time()
      while queue:
@@ -28,10 +28,10 @@ def bfs(graph, start, weight = None, end = None):
              visited[vertex] = True
          for X in graph[vertex]:
              op += 1
-             if visited[X] == False:
-                 queue.append(X)
+             if visited[X] == False and X not in queue:
+                 queue = [X] + queue
      finish = time.time() - start
-     print(op)
+     print("Операций", op)
      print(finish)
      # print("Обход графа = ", path)
      newPath = newPath[::-1]
@@ -43,9 +43,7 @@ def bfs(graph, start, weight = None, end = None):
              end = i
      # print('Путь = ', tmp)
      print(len(tmp))
-     if end is None:
-         return path
-     return tmp
+     return newPath
 
 
 # не ускоряется
@@ -60,14 +58,16 @@ def bfs_paths(graph, start, goal):
                 queue.append((next, path + [next]))
 
 if __name__ == "__main__":
-    N = 10
+    N = 1000
     genAndSave(N)
     graph, weight = load()
     # print(graph)
-    # result_path = bfs2(graph, start=1, weight=weight, end=N*N)
-    result_path = bfs_paths(graph,1, N*N)
-    print(result_path)
+    print("СЧИТАНО")
+    result_path = bfs(graph, start=1, weight=weight, end=N*N)[::-1]
+    # result_path = bfs_paths(graph,1, N*N)
+    # print("Путь = ",result_path)
     sum = 0
+    # print(weight)
     for a in range(len(result_path)-1):
         x = result_path[a]
         y = result_path[a+1]
