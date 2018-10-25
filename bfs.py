@@ -18,6 +18,7 @@ def bfs(graph, start, weight = None, end = None):
          op += 1
          vertex = queue.pop(0)
          if vertex == end or end in graph[vertex]:
+             path.append(vertex)
              path.append(end)
              newPath = path[:]
              break
@@ -59,13 +60,19 @@ def bfs_paths(graph, start, goal):
 
 if __name__ == "__main__":
     N = 1000
-    genAndSave(N)
+    # genAndSave(N)
     graph, weight = load()
-    # print(graph)
+    #print(graph)
     print("СЧИТАНО")
+    x = 1
+    y = 500
+    graph.update({x: graph[x] + [y]})
+    graph.update({y: graph[y] + [x]})
+    weight[(x, y)] = 1491
+    weight[(y, x)] = 1491
     result_path = bfs(graph, start=1, weight=weight, end=N*N)[::-1]
     # result_path = bfs_paths(graph,1, N*N)
-    # print("Путь = ",result_path)
+    #print("Путь = ",result_path)
     sum = 0
     # print(weight)
     for a in range(len(result_path)-1):
